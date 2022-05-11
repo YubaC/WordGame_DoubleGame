@@ -3,8 +3,10 @@ function gameover(reason) { //0：碰到mob 1：被炸死
         if (reason == 0) {
             map[x][y] = '<span style="color: red;">怪</span>';
             point_out = "你 被 怪物 击败了！";
-        } else {
+        } else if (reason == 1) {
             point_out = "你 爆炸了！";
+        } else if (reason == 2) {
+            point_out = "你 胜利了！";
         }
 
 

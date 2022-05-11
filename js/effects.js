@@ -5,7 +5,6 @@ function boom() {
         boom_y = y;
         boom_x_old = x;
         boom_y_old = y;
-        send();
         document.getElementById("boom").disabled = true;
         boom_exist = true;
         setTimeout("explode()", 3000); //延时3秒爆炸
@@ -19,12 +18,14 @@ function explode() {
         for (w = -1 - boom_power; w < 2 + boom_power; w++) {
             if (boom_x + q > -1 && boom_y + w > -1 && boom_x + q < map.length && boom_y + w < map[boom_x].length) {
                 if (boom_x + q == x && boom_y + w == y) {
-                    var over = true;
+                    var over = 1;
                 } else if (boom_x + q == mob_x && boom_y + w == mob_y && !peace.checked) {
                     booming = true;
                     score += 1;
                     document.getElementById("score").innerHTML = "Score:" + score;
                     setTimeout("mobrestart()", 3000);
+                } else if (boom_x + q == else_x && boom_y + w == else_y) {
+                    var over = 2;
                 }
                 map[boom_x + q][boom_y + w] = "炸";
             }
@@ -32,22 +33,24 @@ function explode() {
     }
     boom_x = -1; //清除炸弹
     boom_y = -1;
+    send_json();
     if (over) {
-        gameover(1);
+        gameover(over);
     }
     drawmap();
-    setTimeout("replace()", 1000); //过一秒后清除特效，替换为“土”
+    setTimeout("replace(boom_x_old, boom_y_old)", 1000); //过一秒后清除特效，替换为“土”
 }
 
 // 清除特效，替换为“土”
-function replace() {
+function replace(x_in, y_in) {
     for (e = -1 - boom_power; e < 2 + boom_power; e++) {
         for (r = -1 - boom_power; r < 2 + boom_power; r++) {
-            if (boom_x_old + e > -1 && boom_y_old + r > -1 && boom_x_old + e < map.length && boom_y_old + r < map[boom_x_old].length) {
-                map[boom_x_old + e][boom_y_old + r] = "土";
+            if (x_in + e > -1 && y_in + r > -1 && x_in + e < map.length && y_in + r < map[x_in].length) {
+                map[x_in + e][y_in + r] = "土";
             }
         }
     }
+    send_json();
     drawmap();
     boom_exist = false;
     document.getElementById("boom").disabled = false;

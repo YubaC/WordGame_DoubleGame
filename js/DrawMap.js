@@ -1,12 +1,18 @@
 function drawmap_base() {
     map_print = JSON.parse(JSON.stringify(map));
-
-    map_print[x][y] = '人';
+    if (map_print[x][y] == '炸') {
+        gameover(1);
+    } else {
+        map_print[x][y] = '<span style="color:red;">人</span>';
+    }
     if (!peace.checked && !booming) {
         map_print[mob_x][mob_y] = "怪";
     }
     if (boom_x != -1 && boom_y != -1) { //有人放了炸弹
         map_print[boom_x][boom_y] = "&#128163";
+    }
+    if (else_boom_x != -1 && else_boom_y != -1) { //有人放了炸弹
+        map_print[else_boom_x][else_boom_y] = "&#128163";
     }
     //画地图
     document.getElementById("map").innerHTML = "";
@@ -44,6 +50,9 @@ function drawmap_base() {
                     line += "土";
                 }
                 map_print[i][j] = "土";
+
+            } else if (i == else_x && j == else_y) {
+                line += '<span style="color:blue;">人</span>';
             } else {
                 // line += map_print[i][j];
                 if (mousemove.checked) {

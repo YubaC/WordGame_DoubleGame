@@ -40,17 +40,202 @@ function run(key) {
 
 };
 
-function send_json() {
-    var data_to_send = {
-        'x': x,
-        'y': y,
-        'boom_x': boom_x,
-        'boom_y': boom_y,
-        'map': map
+var date, debug = document.getElementById('debug');
+
+document.onkeydown = function(event) {
+    var key = event || window.event || arguments.callee.caller.arguments[0],
+        // var key = event ? event.charCode : window.event.keyCode,
+
+        _date = new Date().getTime();
+
+    key = key.keyCode;
+    if (!date) {
+        run(key);
+        date = _date;
+
+    } else if (_date >= date + T) {
+
+        run(key);
+        console.log(key);
+
+        date = _date;
+
     }
 
-    console.log(data_to_send)
 }
+
+document.onkeyup = function() {
+    date = 0;
+}
+
+//left按钮事件--鼠标按下
+btn_left.onmousedown = function() {
+    var i = 0; //变量i
+    mouseTime = setInterval(function() { //setInterval可一直执行内部函数
+        button_left();
+        i++ //若过T，执行一次i++
+    }, T);
+    if (i == 0) { //i=0时证明无长按事件为单击事件
+        button_left();
+    }
+}
+
+btn_left.onmouseup = function() { //鼠标抬起，执行清除
+    clearInterval(mouseTime); //清除setInterval的时间
+}
+
+//right按钮事件（内容基本同上，不予注释）    
+btn_right.onmousedown = function() {
+    var i = 0;
+    mouseTime = setInterval(function() {
+        button_right();
+        i++ //i=0时证明无长按事件为单击事件
+    }, T);
+    if (i == 0) {
+        button_right();
+    }
+}
+
+btn_right.onmouseup = function() {
+    clearInterval(mouseTime);
+}
+
+//up按钮事件（内容基本同上，不予注释）    
+btn_up.onmousedown = function() {
+    var i = 0;
+    mouseTime = setInterval(function() {
+        button_up();
+        i++ //i=0时证明无长按事件为单击事件
+    }, T);
+    if (i == 0) {
+        button_up();
+    }
+}
+
+btn_up.onmouseup = function() {
+    clearInterval(mouseTime);
+}
+
+//down按钮事件（内容基本同上，不予注释）    
+btn_down.onmousedown = function() {
+    var i = 0;
+    mouseTime = setInterval(function() {
+        button_down();
+        i++ //i=0时证明无长按事件为单击事件
+    }, T);
+    if (i == 0) {
+        button_down();
+    }
+}
+
+btn_down.onmouseup = function() {
+    clearInterval(mouseTime);
+}
+
+// //移动端适配
+// //left按钮事件--touch
+// var touch_left = document.getElementById('left');
+// touch_left.addEventListener('touchstart', function() {
+//     // document.getElementById("left").disabled = true;
+//     document.getElementById("right").disabled = true;
+//     document.getElementById("up").disabled = true;
+//     document.getElementById("down").disabled = true;
+//     var i = 0; //变量i
+//     mouseTime = setInterval(function() { //setInterval可一直执行内部函数
+//         button_left();
+//         i++ //若过T，执行一次i++
+//     }, T);
+//     if (i == 0) { //i=0时证明无长按事件为单击事件
+//         // button_left();
+//     }
+// }, false);
+
+// var end_left = document.getElementById('left');
+// end_left.addEventListener('touchend', function() { //抬起，执行清除
+//     clearInterval(mouseTime); //清除setInterval的时间
+//     document.getElementById("left").disabled = false;
+//     document.getElementById("right").disabled = false;
+//     document.getElementById("up").disabled = false;
+//     document.getElementById("down").disabled = false;
+// }, false);
+
+// //right
+// var touch_right = document.getElementById('right');
+// touch_right.addEventListener('touchstart', function() {
+//     document.getElementById("left").disabled = true;
+//     //  document.getElementById("right").disabled = true;
+//     document.getElementById("up").disabled = true;
+//     document.getElementById("down").disabled = true;
+//     var i = 0; //变量i
+//     mouseTime = setInterval(function() { //setInterval可一直执行内部函数
+//         button_right();
+//         i++ //若过T，执行一次i++
+//     }, T);
+//     if (i == 0) { //i=0时证明无长按事件为单击事件
+//         // button_right();
+//     }
+// }, false);
+
+// var end_right = document.getElementById('right');
+// end_right.addEventListener('touchend', function() { //鼠标抬起，执行清除
+//     clearInterval(mouseTime); //清除setInterval的时间
+//     document.getElementById("left").disabled = false;
+//     document.getElementById("right").disabled = false;
+//     document.getElementById("up").disabled = false;
+//     document.getElementById("down").disabled = false;
+// }, false);
+
+// // up
+// var touch_up = document.getElementById('up');
+// touch_up.addEventListener('touchstart', function() {
+//     document.getElementById("left").disabled = true;
+//     document.getElementById("right").disabled = true;
+//     //  document.getElementById("up").disabled = true;
+//     document.getElementById("down").disabled = true;
+//     var i = 0; //变量i
+//     mouseTime = setInterval(function() { //setInterval可一直执行内部函数
+//         button_up();
+//         i++ //若过T，执行一次i++
+//     }, T);
+//     if (i == 0) { //i=0时证明无长按事件为单击事件
+//         // button_up();
+//     }
+// }, false);
+
+// var end_up = document.getElementById('up');
+// end_up.addEventListener('touchend', function() { //鼠标抬起，执行清除
+//     clearInterval(mouseTime); //清除setInterval的时间
+//     document.getElementById("left").disabled = false;
+//     document.getElementById("right").disabled = false;
+//     document.getElementById("up").disabled = false;
+//     document.getElementById("down").disabled = false;
+// }, false);
+
+// //down
+// var touch_down = document.getElementById('down');
+// touch_down.addEventListener('touchstart', function() {
+//     document.getElementById("left").disabled = true;
+//     document.getElementById("right").disabled = true;
+//     document.getElementById("up").disabled = true;
+//     //  document.getElementById("down").disabled = true;
+//     var i = 0; //变量i
+//     mouseTime = setInterval(function() { //setInterval可一直执行内部函数
+//         button_down();
+//         i++ //若过T，执行一次i++
+//     }, T);
+//     if (i == 0) { //i=0时证明无长按事件为单击事件
+//         // button_down();
+//     }
+// }, false);
+
+// var end_down = document.getElementById('down');
+// end_down.addEventListener('touchend', function() { //鼠标抬起，执行清除
+//     clearInterval(mouseTime); //清除setInterval的时间
+//     document.getElementById("left").disabled = false;
+//     document.getElementById("right").disabled = false;
+//     document.getElementById("up").disabled = false;
+//     document.getElementById("down").disabled = false;
+// }, false);
 
 function button_up() {
     moving = false;
@@ -70,6 +255,22 @@ function button_left() {
 function button_right() {
     moving = false;
     right();
+}
+
+function send_json() {
+    var data_to_send = {
+        'id': id,
+        'x': x,
+        'y': y,
+        'boom_x': boom_x,
+        'boom_y': boom_y,
+        'map': map
+    }
+
+    var json_data = JSON.stringify(data_to_send);
+
+    output(data_to_send)
+    WSsend(json_data);
 }
 
 // 移动
