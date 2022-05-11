@@ -1,4 +1,4 @@
-ip_number = prompt("请输入ip地址", "127.0.0.1");
+ip_number = prompt("请输入ip地址", "192.168.1.1");
 try {
     ws = new WebSocket("ws://" + ip_number + ":8080/");
 } catch (err) {
