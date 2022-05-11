@@ -7,7 +7,10 @@ function boom() {
         boom_y_old = y;
         document.getElementById("boom").disabled = true;
         boom_exist = true;
-        setTimeout("explode()", 3000); //延时3秒爆炸
+        setTimeout(
+            function() {
+                explode();
+            }, 3000); //延时3秒爆炸
     }
     drawmap_base();
 }
@@ -77,7 +80,9 @@ function findwarter() {
         drawmap_base();
 
     }
-    setTimeout("findwarter()", 1000); //间隔一秒重复执行
+    setTimeout(function() {
+        findwarter()
+    }, 1000); //间隔一秒重复执行
 }
 
 // 草地蔓延
@@ -103,5 +108,7 @@ function findgrass() {
         drawmap_base();
 
     }
-    setTimeout("findgrass()", 5000); //间隔五秒重复执行
+    setTimeout(function() {
+        findgrass()
+    }, 5000); //间隔五秒重复执行
 }

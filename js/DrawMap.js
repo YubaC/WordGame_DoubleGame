@@ -52,7 +52,11 @@ function drawmap_base() {
                 map_print[i][j] = "土";
 
             } else if (i == else_x && j == else_y) {
-                line += '<span style="color:#9F35FF;">人</span>';
+                if (map_print[else_x][else_x] != '炸') {
+                    line += '<span style="color:#9F35FF;">人</span>';
+                } else {
+                    gameover(2);
+                }
             } else {
                 // line += map_print[i][j];
                 if (mousemove.checked) {
