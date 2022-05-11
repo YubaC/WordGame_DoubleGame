@@ -1,5 +1,9 @@
 ip_number = prompt("请输入ip地址", "127.0.0.1");
-ws = new WebSocket("ws://" + ip_number + ":8080/");
+try {
+    ws = new WebSocket("ws://" + ip_number + ":8080/");
+} catch (err) {
+    window.alert(err);
+}
 know_id = false
 
 // ws = new WebSocket("ws://localhost:9001/");

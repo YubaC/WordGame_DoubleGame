@@ -80,54 +80,57 @@
     <p id="map"></p>
 
     <!-- 操作 -->
-    <diiv id="operation">
-        <div class="button1" id="button">
-            <button class="up" id="up">↑</button><br>
-            <button class="left" id="left">←</button>
-            <button class="right" id="right">→</button><br>
-            <button class="down" id="down">↓</button>
+    <div class="button1" id="button">
+        <button class="up" id="up">↑</button><br>
+        <button class="left" id="left">←</button>
+        <button class="right" id="right">→</button><br>
+        <button class="down" id="down">↓</button>
+    </div>
+    <div class="button2" id="button">
+        <button id="boom" onclick="boom()" class="boom">&#128163;</button><br>
+    </div>
+    <br>
+    <div>
+        <hr>
+        <button id="save" onclick="save()">保存</button><br>
+        <a href="javascript:void(0);" onClick="map_list_hide()" id="map_list_hide">隐藏地图列表</a>
+        <a href="javascript:void(0);" onClick="map_list_show()" id="map_list_show">显示地图列表</a><br>
+        <div id="editor">
+            <a href="javascript:void(0);" onClick="edit(map_list, map_id, map_order)" id="edit">编辑</a>
+            <a href="javascript:void(0);" onClick="exit_editing()" id="exit_editing">退出编辑</a><br>
+            <ul id="maplist"></ul>
         </div>
-        <div class="button2" id="button">
-            <button id="boom" onclick="boom()" class="boom">&#128163;</button><br>
+    </div>
+    <div>
+        <hr>
+        <input type="CheckBox" id="mousemove" onclick="drawmap_base()">鼠标点击移动<br>
+        <input type="CheckBox" id="waterrun">河水蔓延<br>
+        <input type="CheckBox" id="grassrun">草地蔓延<br>
+        <div id="leftmain">
+            <input type="CheckBox" onclick="ischeck(this);" id="left_main">惯用左手<br>
         </div>
-        <br>
+        <input type="CheckBox" id="peace" checked="checked">和平<br>
+        <input type="CheckBox" id="unmatched">无敌<br>
         <div>
-            <hr>
-            <button id="save" onclick="save()">保存</button><br>
-            <a href="javascript:void(0);" onClick="map_list_hide()" id="map_list_hide">隐藏地图列表</a>
-            <a href="javascript:void(0);" onClick="map_list_show()" id="map_list_show">显示地图列表</a><br>
-            <div id="editor">
-                <a href="javascript:void(0);" onClick="edit(map_list, map_id, map_order)" id="edit">编辑</a>
-                <a href="javascript:void(0);" onClick="exit_editing()" id="exit_editing">退出编辑</a><br>
-                <ul id="maplist"></ul>
-            </div>
+            炸弹威力: <input type="range" id="boom_power" min="0" max="3" onchange="boompowerchange()" value="1"><span id="power">1</span><br>
         </div>
-        <div>
-            <hr>
-            <input type="CheckBox" id="mousemove" onclick="drawmap_base()">鼠标点击移动<br>
-            <input type="CheckBox" id="waterrun">河水蔓延<br>
-            <input type="CheckBox" id="grassrun">草地蔓延<br>
-            <div id="leftmain">
-                <input type="CheckBox" onclick="ischeck(this);" id="left_main">惯用左手<br>
-            </div>
-            <input type="CheckBox" id="peace" checked="checked">和平<br>
-            <input type="CheckBox" id="unmatched">无敌<br>
-            <div>
-                炸弹威力: <input type="range" id="boom_power" min="0" max="3" onchange="boompowerchange()" value="1"><span id="power">1</span><br>
-            </div>
-        </div>
+    </div>
 
-        <a href="javascript:void(0);" onClick="show()" id="show">显示地图组件</a><br>
+    <a href="javascript:void(0);" onClick="show()" id="show">显示地图组件</a><br>
 
-        <div id="hide">
-            <hr>
-            <textarea id="in" placeholder="导入地图" rows="15" cols="30"></textarea>
-            <a href="javascript:void(0);" onClick="process()" id="do_process">加载地图</a><br>
-            <a href="mapbuilder.html" id="show">编辑地图</a><br>
-            <a href="explain.html" id="show">说明</a><br>
-            <a href="javascript:void(0);" onClick="hide()" id="hide">隐藏地图组件</a>
-        </div>
-    </diiv>
+    <div id="hide">
+        <hr>
+        <textarea id="in" placeholder="导入地图" rows="15" cols="30"></textarea>
+        <a href="javascript:void(0);" onClick="process()" id="do_process">加载地图</a><br>
+        <a href="mapbuilder.html" id="show">编辑地图</a><br>
+        <a href="explain.html" id="show">说明</a><br>
+        <a href="javascript:void(0);" onClick="hide()" id="hide">隐藏地图组件</a>
+    </div>
+
+    <p>
+        当无法连接至服务器时请<a href="WordGame_DoubleGame.zip">下载游戏包</a><br>
+        <a href="server.exe">下载exe版server</a>
+    </p>
     <!--  
 ----------------→y
 |
