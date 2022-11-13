@@ -22,16 +22,15 @@ function submitip() {
     know_id = false;
 
     // ws = new WebSocket("ws://localhost:9001/");
-
-    ws;
-    ws.onopen = function() {
-        output("onopen");
-        document.getElementById("game").classList.add("yes");
-        document.getElementById("status").innerHTML = '<span style="color:green">已连接</span>';
-
-    };
 }
 
+ws;
+ws.onopen = function() {
+    output("onopen");
+    document.getElementById("game").classList.add("yes");
+    document.getElementById("status").innerHTML = '<span style="color:green">已连接</span>';
+
+};
 submitip();
 
 ws.onmessage = function(e) {
