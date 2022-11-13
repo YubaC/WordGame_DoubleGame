@@ -1,17 +1,38 @@
-ip_number = prompt("请输入ip地址", "192.168.1.1");
-try {
-    ws = new WebSocket("ws://" + ip_number + ":8080/");
-} catch (err) {
-    window.alert(err);
+// ip_number = prompt("请输入ip地址", "192.168.1.1");
+
+ip = getCookie("saved_ip");
+if (ip != "") {
+    document.getElementById("ip_input").value = ip;
+    submitip();
 }
-know_id = false
 
-// ws = new WebSocket("ws://localhost:9001/");
+function submitip() {
+    ip_number = document.getElementById("ip_input").value;
+    setCookie("saved_ip", ip_number, 30 * 365);
 
-var ws;
-ws.onopen = function() {
-    output("onopen");
-};
+    try {
+        ws = new WebSocket("ws://" + ip_number + ":8080/");
+
+    } catch (err) {
+        window.alert(err);
+        document.getElementById("game").classList.add("no");
+        document.getElementById("status").innerHTML = '<span style="color:red">未连接</span>';
+
+    }
+    know_id = false;
+
+    // ws = new WebSocket("ws://localhost:9001/");
+
+    ws;
+    ws.onopen = function() {
+        output("onopen");
+        document.getElementById("game").classList.add("yes");
+        document.getElementById("status").innerHTML = '<span style="color:green">已连接</span>';
+
+    };
+}
+
+submitip();
 
 ws.onmessage = function(e) {
         // e.data contains received string.
@@ -148,6 +169,7 @@ function output(str) {
         // replace(/>/, "&gt;").replace(/"/, "&quot;"); // "
         //     log.innerHTML = escaped + "<br>" + log.innerHTML;
 }
+
 /*1. 创建⼀个空对象 
 var jsonObj = {};
 2. 创建⼀个新对象 
