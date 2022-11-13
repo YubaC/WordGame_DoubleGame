@@ -31,7 +31,7 @@ ws.onopen = function() {
     document.getElementById("status").innerHTML = '<span style="color:green">已连接</span>';
 
 };
-submitip();
+// submitip();
 
 ws.onmessage = function(e) {
         // e.data contains received string.
